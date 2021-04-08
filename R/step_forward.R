@@ -24,9 +24,6 @@ step_forward <- function(data = data,
     stop( "El argumento x esta vacio, es necesario ingresar la variable dependiente")
   }
 
-  if(is.character(var_list) == FALSE){
-    var_list <- as.character(var_list)
-  }
 
   if(is.null(var_list) == FALSE){
     temp_db<<- data %>% select(all_of({{var_list}}))
@@ -69,8 +66,11 @@ step_forward <- function(data = data,
       }
   }
   datos <- rbind(datos,datos2)
-  datos <- datos %>% mutate(significativo = ifelse(p_valor < alpha,"Significativo","No significativo")) %>%
+  datos <- datos %>%
+    mutate(significativo = ifelse(p_valor < alpha,"Significativo","No significativo")) %>%
     arrange(p_valor)
+  datos <- na.omit(datos)
+
 
   if(guardar == TRUE)
   {
