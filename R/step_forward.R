@@ -19,10 +19,14 @@ step_forward <- function(data = data,
                               alpha = 0.2,
                               guardar = FALSE){
 
-  stop(if(is.null(x) == TRUE)
+  if(is.null(x) == TRUE)
     {
-    "El argumento x esta vacio, es necesario ingresar la variable dependiente"
-  })
+    stop( "El argumento x esta vacio, es necesario ingresar la variable dependiente")
+  }
+
+  if(is.character(var_list) == FALSE){
+    var_list <- as.character(var_list)
+  }
 
   if(is.null(var_list) == FALSE){
     temp_db<<- data %>% select(all_of({{var_list}}))
