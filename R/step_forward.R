@@ -77,6 +77,7 @@ step_forward <- function(data = data,
     datos_stepforward <<- datos
     print(datos_stepforward)
   } else {
+    datos_stepforward <- datos
     print(datos_stepforward)
   }
 }
